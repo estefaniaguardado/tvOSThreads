@@ -13,6 +13,8 @@ private let reuseIdentifier = "Cell"
 class FlickrCollectionViewController: UICollectionViewController {
     
     var cellColor = true
+    private var flickr = [FlickrResults]() //searches
+    private let connection = FlickrAPIConnection() //flickr
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +24,28 @@ class FlickrCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = UIColor.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.startAnimating()
+        
+        connection.getFlickrResourceForTerm("flower"){
+            results, error in
+            
+            activityIndicator.removeFromSuperview()
+            
+            if let error = error {
+                print("Error searching : \(error)")
+            } 
+            
+            if let results = results {
+                print("Found \(results.results.count) matching \(results.term)")
+                self.flickr.insert(results, at: 0)
+                
+                self.collectionView?.reloadData()
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -40,22 +64,32 @@ class FlickrCollectionViewController: UICollectionViewController {
     */
 
     // MARK: UICollectionViewDataSource
+    
+    func photoForIndexPath(indexPath: IndexPath) -> FlickrPhoto {
+        return flickr[(indexPath as NSIndexPath).section].results[(indexPath as IndexPath).row]
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+        return flickr.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
-        return 50
+        return flickr[section].results.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
-        // Configure the cell
+        //Handling in threads
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+        //                                              for: indexPath) as! FlickrPhotoCollectionViewCell
+        
+        //let flickrPhoto = photoForIndexPath(indexPath: indexPath)
+        //cell.backgroundColor = UIColor.white
+        
+        //cell.flickrPhoto.image = flickrPhoto.thumbnail
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+                                                      for: indexPath)
         cell.backgroundColor = cellColor ? UIColor.red : UIColor.blue
         cellColor = !cellColor
         

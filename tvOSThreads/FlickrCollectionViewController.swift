@@ -13,6 +13,8 @@ private let reuseIdentifier = "Cell"
 class FlickrCollectionViewController: UICollectionViewController {
     
     var cellColor = true
+    private var flickr = [FlickrResults]()
+    private let connection = FlickrAPIConnection()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +24,32 @@ class FlickrCollectionViewController: UICollectionViewController {
 
         // Register cell classes
         self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
+        
+        let activityIndicator = UIActivityIndicatorView()
+        activityIndicator.color = UIColor.gray
+        activityIndicator.center = self.view.center
+        activityIndicator.startAnimating()
+        
+        connection.getFlickrResourceForTerm("flower"){
+            results, error in
+            
+            activityIndicator.removeFromSuperview()
+            
+            if let error = error {
+                print("Error searching : \(error)")
+            } 
+            
+            if let results = results {
+                print("Found \(results.results.count) matching \(results.term)")
+                self.flickr.insert(results, at: 0)
+                
+                //self.collectionView?.reloadData()
+            }
+            
+        }
+    
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -40,6 +67,10 @@ class FlickrCollectionViewController: UICollectionViewController {
     */
 
     // MARK: UICollectionViewDataSource
+    
+    func photoForIndexPath(indexPath: IndexPath) -> FlickrPhoto {
+        return flickr[(indexPath as NSIndexPath).section].results[(indexPath as IndexPath).row]
+    }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
@@ -54,7 +85,7 @@ class FlickrCollectionViewController: UICollectionViewController {
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-    
+            
         // Configure the cell
         cell.backgroundColor = cellColor ? UIColor.red : UIColor.blue
         cellColor = !cellColor

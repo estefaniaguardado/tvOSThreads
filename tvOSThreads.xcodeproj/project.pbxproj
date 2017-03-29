@@ -7,8 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA15720B1E8BA7C5000E8A3B /* FlickrCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA15720A1E8BA7C5000E8A3B /* FlickrCollectionViewController.swift */; };
 		CAA5E11E1E8BA62F00DAC210 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5E11D1E8BA62F00DAC210 /* AppDelegate.swift */; };
-		CAA5E1201E8BA62F00DAC210 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5E11F1E8BA62F00DAC210 /* ViewController.swift */; };
 		CAA5E1231E8BA62F00DAC210 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CAA5E1211E8BA62F00DAC210 /* Main.storyboard */; };
 		CAA5E1251E8BA62F00DAC210 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CAA5E1241E8BA62F00DAC210 /* Assets.xcassets */; };
 		CAA5E1301E8BA63000DAC210 /* tvOSThreadsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAA5E12F1E8BA63000DAC210 /* tvOSThreadsTests.swift */; };
@@ -33,9 +33,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA15720A1E8BA7C5000E8A3B /* FlickrCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlickrCollectionViewController.swift; sourceTree = "<group>"; };
 		CAA5E11A1E8BA62F00DAC210 /* tvOSThreads.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = tvOSThreads.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CAA5E11D1E8BA62F00DAC210 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		CAA5E11F1E8BA62F00DAC210 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		CAA5E1221E8BA62F00DAC210 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CAA5E1241E8BA62F00DAC210 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CAA5E1261E8BA62F00DAC210 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -96,7 +96,7 @@
 			isa = PBXGroup;
 			children = (
 				CAA5E11D1E8BA62F00DAC210 /* AppDelegate.swift */,
-				CAA5E11F1E8BA62F00DAC210 /* ViewController.swift */,
+				CA15720A1E8BA7C5000E8A3B /* FlickrCollectionViewController.swift */,
 				CAA5E1211E8BA62F00DAC210 /* Main.storyboard */,
 				CAA5E1241E8BA62F00DAC210 /* Assets.xcassets */,
 				CAA5E1261E8BA62F00DAC210 /* Info.plist */,
@@ -255,8 +255,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAA5E1201E8BA62F00DAC210 /* ViewController.swift in Sources */,
 				CAA5E11E1E8BA62F00DAC210 /* AppDelegate.swift in Sources */,
+				CA15720B1E8BA7C5000E8A3B /* FlickrCollectionViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -493,6 +493,7 @@
 				CAA5E1411E8BA63000DAC210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAA5E1421E8BA63000DAC210 /* Build configuration list for PBXNativeTarget "tvOSThreadsTests" */ = {
 			isa = XCConfigurationList;
@@ -501,6 +502,7 @@
 				CAA5E1441E8BA63000DAC210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CAA5E1451E8BA63000DAC210 /* Build configuration list for PBXNativeTarget "tvOSThreadsUITests" */ = {
 			isa = XCConfigurationList;
@@ -509,6 +511,7 @@
 				CAA5E1471E8BA63000DAC210 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

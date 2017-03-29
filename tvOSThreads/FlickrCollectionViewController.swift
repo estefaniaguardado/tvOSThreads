@@ -45,11 +45,8 @@ class FlickrCollectionViewController: UICollectionViewController {
                 
                 self.collectionView?.reloadData()
             }
-            
         }
-    
     }
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -73,20 +70,26 @@ class FlickrCollectionViewController: UICollectionViewController {
     }
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return flickr.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // #warning Incomplete implementation, return the number of items
         return flickr[section].results.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
-            
-        // Configure the cell
+        //Handling in threads
+        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+        //                                              for: indexPath) as! FlickrPhotoCollectionViewCell
+        
+        //let flickrPhoto = photoForIndexPath(indexPath: indexPath)
+        //cell.backgroundColor = UIColor.white
+        
+        //cell.flickrPhoto.image = flickrPhoto.thumbnail
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
+                                                      for: indexPath)
         cell.backgroundColor = cellColor ? UIColor.red : UIColor.blue
         cellColor = !cellColor
         

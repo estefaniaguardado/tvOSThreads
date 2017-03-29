@@ -13,8 +13,8 @@ private let reuseIdentifier = "Cell"
 class FlickrCollectionViewController: UICollectionViewController {
     
     var cellColor = true
-    private var flickr = [FlickrResults]()
-    private let connection = FlickrAPIConnection()
+    private var flickr = [FlickrResults]() //searches
+    private let connection = FlickrAPIConnection() //flickr
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,7 +43,7 @@ class FlickrCollectionViewController: UICollectionViewController {
                 print("Found \(results.results.count) matching \(results.term)")
                 self.flickr.insert(results, at: 0)
                 
-                //self.collectionView?.reloadData()
+                self.collectionView?.reloadData()
             }
             
         }
@@ -74,13 +74,13 @@ class FlickrCollectionViewController: UICollectionViewController {
 
     override func numberOfSections(in collectionView: UICollectionView) -> Int {
         // #warning Incomplete implementation, return the number of sections
-        return 1
+        return flickr.count
     }
 
 
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return 50
+        return flickr[section].results.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

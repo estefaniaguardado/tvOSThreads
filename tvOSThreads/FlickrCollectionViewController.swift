@@ -12,32 +12,34 @@ private let reuseIdentifier = "Cell"
 
 class FlickrCollectionViewController: UICollectionViewController {
     
-    var cellColor = true
-    private var flickr = [FlickrResults]() //searches
-    private let connection = FlickrAPIConnection() //flickr
+    private var flickr = [FlickrResults]()
+    private let connection = FlickrAPIConnection()
+    let activityIndicator = UIActivityIndicatorView()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
-
-        // Register cell classes
-        self.collectionView!.register(UICollectionViewCell.self, forCellWithReuseIdentifier: reuseIdentifier)
         
-        let activityIndicator = UIActivityIndicatorView()
         activityIndicator.color = UIColor.gray
         activityIndicator.center = self.view.center
         activityIndicator.startAnimating()
         
+        getFlickrData()
+        
+    }
+    
+    func getFlickrData() -> Void {
         connection.getFlickrResourceForTerm("flower"){
             results, error in
             
-            activityIndicator.removeFromSuperview()
+            self.activityIndicator.removeFromSuperview()
             
             if let error = error {
                 print("Error searching : \(error)")
-            } 
+            }
             
             if let results = results {
                 print("Found \(results.results.count) matching \(results.term)")
@@ -79,19 +81,14 @@ class FlickrCollectionViewController: UICollectionViewController {
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        //Handling in threads
-        //let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
-        //                                              for: indexPath) as! FlickrPhotoCollectionViewCell
-        
-        //let flickrPhoto = photoForIndexPath(indexPath: indexPath)
-        //cell.backgroundColor = UIColor.white
-        
-        //cell.flickrPhoto.image = flickrPhoto.thumbnail
-        
+
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier,
-                                                      for: indexPath)
-        cell.backgroundColor = cellColor ? UIColor.red : UIColor.blue
-        cellColor = !cellColor
+                                                      for: indexPath) as! FlickrPhotoCollectionViewCell
+        
+        let flickrPhoto = photoForIndexPath(indexPath: indexPath)
+        cell.backgroundColor = UIColor.white
+        
+        cell.flickrPhoto.image = flickrPhoto.thumbnail
         
         return cell
     }

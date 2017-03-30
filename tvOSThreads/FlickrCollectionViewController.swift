@@ -14,6 +14,8 @@ class FlickrCollectionViewController: UICollectionViewController {
     
     private var flickr = [FlickrResults]()
     private let connection = FlickrAPIConnection()
+    let activityIndicator = UIActivityIndicatorView()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,19 +23,23 @@ class FlickrCollectionViewController: UICollectionViewController {
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
         
-        let activityIndicator = UIActivityIndicatorView()
         activityIndicator.color = UIColor.gray
         activityIndicator.center = self.view.center
         activityIndicator.startAnimating()
         
+        getFlickrData()
+        
+    }
+    
+    func getFlickrData() -> Void {
         connection.getFlickrResourceForTerm("flower"){
             results, error in
             
-            activityIndicator.removeFromSuperview()
+            self.activityIndicator.removeFromSuperview()
             
             if let error = error {
                 print("Error searching : \(error)")
-            } 
+            }
             
             if let results = results {
                 print("Found \(results.results.count) matching \(results.term)")
